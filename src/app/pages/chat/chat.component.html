@@ -1,0 +1,18 @@
+<div class="chat">
+  <div class="bar"></div>
+  <div class="messages" id="chat">
+    <div *ngFor="let message of messageList" class="message"
+      [ngClass]="message.user?.username === username ? 'me' : ''">
+      <span class="time">
+        {{ message.user?.username }} -
+        {{ message.createdAt | date:'h:mm:ss' }}
+      </span>
+      <span>{{ message.message }}</span>
+    </div>
+  </div>
+  <div class="input">
+    <input [(ngModel)]="newMessage" placeholder="Type your message here!" type="text" />
+    <button (click)="sendMessage()"
+      style="border: none;padding: 10px;border-radius: 10px;cursor: pointer;">Send</button>
+  </div>
+</div>

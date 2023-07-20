@@ -1,0 +1,16 @@
+<header>
+  <div class="logo">ARDAILHAN</div>
+  <nav class="big links">
+    <a class="item" routerLink="/">Home</a>
+    <a class="item" routerLink="/chat">Chat</a>
+    <button class="item" (click)="logout()">Logout</button>
+  </nav>
+  <div class="small links">
+    <nav *ngIf="toggle" class="small-links">
+      <a class="item" routerLink="/">Home</a>
+      <a class="item" routerLink="/chat">Chat</a>
+    </nav>
+    <button class="item" (click)="logout()">Logout</button>
+    <button class="item" (click)="toggleMenu()">Menu</button>
+  </div>
+</header>
