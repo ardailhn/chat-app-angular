@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ChatService } from './services/chat/chat.service';
-import { lastValueFrom } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +8,8 @@ import { lastValueFrom } from 'rxjs';
 })
 export class AppComponent {
   title: string = "Chat App";
+
+  constructor(private titleSevice: Title) {
+    this.titleSevice.setTitle($localize`${this.title}`);
+  }
 }
