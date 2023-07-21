@@ -1,18 +1,30 @@
 <div class="chat">
-  <div class="bar"></div>
-  <div class="messages" id="chat">
-    <div *ngFor="let message of messageList" class="message"
-      [ngClass]="message.user?.username === username ? 'me' : ''">
-      <span class="time">
-        {{ message.user?.username }} -
-        {{ message.createdAt | date:'h:mm:ss' }}
-      </span>
-      <span>{{ message.message }}</span>
+  <!-- Messages -->
+  <div class="flex-1 overflow-auto h-[50vh] text-black">
+    <div class="py-2 px-3">
+      <div *ngFor="let message of messageList" class="flex mb-2"
+        [ngClass]="message.user?.username === username ? 'justify-end' : ''">
+        <div class="rounded py-2 px-3"
+          [ngStyle]="message.user?.username === username ? {backgroundColor: '#F2F2F2'} : {backgroundColor: '#f39c12'}">
+          <p class="text-sm mt-1">
+            {{ message.message }}
+          </p>
+          <p class="text-right text-xs text-grey-dark mt-1">
+            {{ message.user?.username }} - {{ message.createdAt | date:'h:mm:ss' }}
+          </p>
+        </div>
+      </div>
+      <div id="chat"></div>
     </div>
   </div>
-  <div class="input">
-    <input [(ngModel)]="newMessage" placeholder="Type your message here!" type="text" />
-    <button (click)="sendMessage()"
-      style="border: none;padding: 10px;border-radius: 10px;cursor: pointer;">Send</button>
+
+  <!-- Input -->
+  <div class="px-4 py-4 flex items-center">
+    <div class="flex-1 mx-4">
+      <input [(ngModel)]="newMessage" class="w-full border rounded px-2 py-2" type="text" />
+    </div>
+    <div>
+      <button (click)="sendMessage()" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">Send</button>
+    </div>
   </div>
 </div>

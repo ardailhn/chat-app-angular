@@ -13,22 +13,24 @@ export class ChatComponent implements OnInit {
   messageList: any[] = [];
   name: string = 'angular';
   username: string = 'unknown';
-  constructor(private chatService: ChatService,private authService:AuthService) { }
+  constructor(private chatService: ChatService, private authService: AuthService) { }
 
   ngOnInit() {
     this.getMessages();
     this.chatService.getNewMessage().subscribe((message: string) => {
-      console.log('message: ', message);
-      this.messageList.push(message);
+      if (message) {
+        this.messageList.push(message);
+      }
     })
-    this.idk();
     this.username = this.authService.getParsedAccessToken().UserInfo.username;
   }
 
   async getMessages() {
-    this.chatService.getMessages().subscribe((messages: any) => {
-      this.messageList = messages;
-    })
+    const messages:any = await lastValueFrom(this.chatService.getMessages());
+    this.messageList = messages;
+    setTimeout(() => {
+      this.idk();
+    }, 0);
   }
 
   async sendMessage() {
@@ -41,8 +43,14 @@ export class ChatComponent implements OnInit {
     this.newMessage = '';
   }
 
+  triggerFileInput() {
+    document.getElementById('fileInput')?.click();
+    console.log('messageList: ', this.messageList);
+  }
+
   idk() {
-    const chat: any = document.getElementById('chat');
-    chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+    const chat = document.getElementById('chat');
+    if (typeof chat === 'undefined' || !chat) return;
+    chat.scrollIntoView();
   }
 }
