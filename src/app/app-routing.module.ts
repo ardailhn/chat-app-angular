@@ -3,13 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
-    canActivate: [AuthGuard]
-  },
   {
     path: 'login',
     component: LoginComponent
@@ -17,7 +13,14 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  }
+  },
+  { path: "404", component: NotFoundComponent },
+  {
+    path: '',
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
+    canActivate: [AuthGuard]
+  },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({

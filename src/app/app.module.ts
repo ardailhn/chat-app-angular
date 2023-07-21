@@ -9,12 +9,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthService } from './services/auth/auth.service';
 import { TokenInterceptor } from './services/auth/auth.interceptor';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
